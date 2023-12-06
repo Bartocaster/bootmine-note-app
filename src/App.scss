@@ -40,6 +40,7 @@ body {
   gap: 20px;
 }
 
+
 .note-item {
   display: flex;
   flex-direction: column;
@@ -55,24 +56,32 @@ body {
 .notes-header {
   display: flex;
   justify-content:  flex-end;
-}
 
-.notes-header button {
-  font-size: 16px;
-  background: transparent;
-  border: none;
-  cursor: pointer;
-  max-width: fit-content;
+  button {
+    font-size: 16px;
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    max-width: fit-content;
+  }
 }
 
 h2 {
   margin: 0;
 }
 
+$note-button-color: rgb(106,175,198);
 .note-form {
   display: flex;
   flex-direction: column;
   gap: 20px;
+
+  button {
+    border-radius: 5px;
+    background-color: $note-button-color;
+    cursor: pointer;
+  }
+
 }
 
 textarea,
@@ -83,8 +92,26 @@ input {
   font-size: 16px;
 }
 
-.note-form button {
-  border-radius: 5px;
-  background-color: rgb(106,175,198);
-  cursor: pointer;
+// .note-form button {
+//   border-radius: 5px;
+//   background-color: rgb(106,175,198);
+//   cursor: pointer;
+// }
+
+$cancel-button-color: rgb(220, 89, 89);
+$edit-button-text-color: white;
+.edit-buttons {
+  display: flex;
+  justify-content: space-evenly;
+  gap: 5px;
+
+  button {
+    flex: 1;
+  }
+
+  button:last-of-type {
+    background-color: $cancel-button-color;
+    color: $edit-button-text-color;
+  }
+
 }

@@ -102,7 +102,12 @@ const App = () => {
   return(
   <div className="app-container">
     <form className="note-form" 
-    onSubmit={(event)=> handleAddNote(event)}>
+    onSubmit={(event) => 
+      selectedNote
+      ? handleUpdateNote(event)
+      : handleAddNote(event)
+      }
+    >
       <input 
       value={title}
       onChange={(event) =>
