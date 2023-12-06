@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-import logo from './logo.svg';
 import "./index.scss";
 import "./App.scss";
 
@@ -50,55 +49,68 @@ const App = () => {
 
   const handleAddNote = (
     event: React.FormEvent
-    ) => {
-      event.preventDefault();
+  ) => {
+    event.preventDefault();
 
 
-      const newNote: Note = {
-        id: notes.length + 1,
-        title: title,
-        content: content,
-      };
-
-      setNotes([newNote, ...notes]);
-      setTitle("");
-      setContent("");
+    const newNote: Note = {
+      id: notes.length + 1,
+      title: title,
+      content: content,
     };
+
+    setNotes([newNote, ...notes]);
+    setTitle("");
+    setContent("");
+  };
     
-    const handleUpdateNote = (
-      event: React.FormEvent
-    ) => {
-      event.preventDefault();
+  const handleUpdateNote = (
+    event: React.FormEvent
+  ) => {
+    event.preventDefault();
 
-      if(!selectedNote){
-        return;
-      }
-
-      const updatedNote: Note = {
-        id: selectedNote.id,
-        title: title,
-        content: content,
-      }
-
-      const updatedNotesList = notes.map((note)=>
-      note.id === selectedNote.id
-        ? updatedNote
-        : note
-      )
-
-      setNotes(updatedNotesList);
-      setTitle("")
-      setContent("")
-      setSelectedNote(null);
-    };
-
-    const handleCancel = () => {
-      setTitle("")
-      setContent("")
-      setSelectedNote(null);
+    if(!selectedNote){
+      return;
     }
-  
 
+    const updatedNote: Note = {
+      id: selectedNote.id,
+      title: title,
+      content: content,
+    }
+
+    const updatedNotesList = notes.map((note)=>
+    note.id === selectedNote.id
+      ? updatedNote
+      : note
+    )
+
+    setNotes(updatedNotesList);
+    setTitle("")
+    setContent("")
+    setSelectedNote(null);
+  };
+
+  const handleCancel = () => {
+    setTitle("")
+    setContent("")
+    setSelectedNote(null);
+  }
+  
+  const deleteNote = (
+    event: React.MouseEvent,
+    noteId: number
+    ) => {
+      event.stopPropagation();
+
+    const updatedNotes = notes.filter(
+      (note) => note.id !== noteId
+    )
+
+    setNotes(updatedNotes);
+  };
+
+  
   return(
   <div className="app-container">
     <form className="note-form" 
@@ -143,7 +155,12 @@ const App = () => {
             onClick={()=> handleNoteClick(note)}
           >
             <div className="notes-header">
-              <button>x</button>
+              <button onClick={(event) =>
+                deleteNote(event, note.id)
+              }
+            >
+              x
+            </button>
             </div>
             <h2>{note.title}</h2>
             <p>{note.content}</p>
