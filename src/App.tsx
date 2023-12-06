@@ -38,12 +38,21 @@ const App = () => {
   const [title, setTitle] = useState("");
   const [content, setContent] = useState("");
 
-  const handleSubmit = (
+  const [SelectedNote, setSelectedNote] =
+  useState<Note | null>(null);
+
+  const handleNoteClick = (note:Note) => {
+    setSelectedNote(note);
+    setTitle(note.title);
+    setContent(note.content);
+
+  }
+
+  const handleAddNote = (
     event: React.FormEvent
     ) => {
       event.preventDefault();
-      console.log("title: ", title)
-      console.log("content: ", content)
+
 
       const newNote: Note = {
         id: notes.length + 1,
@@ -59,7 +68,7 @@ const App = () => {
   return(
   <div className="app-container">
     <form className="note-form" 
-    onSubmit={(event)=> handleSubmit(event)}>
+    onSubmit={(event)=> handleAddNote(event)}>
       <input 
       value={title}
       onChange={(event) =>
@@ -83,7 +92,9 @@ const App = () => {
     </form>
       <div className="notes-grid">
         {notes.map((note)=> (
-          <div className="note-item">
+          <div className="note-item"
+            onClick={()=> handleNoteClick(note)}
+          >
             <div className="notes-header">
               <button>x</button>
             </div>
