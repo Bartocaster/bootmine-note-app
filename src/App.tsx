@@ -3,8 +3,16 @@ import logo from './logo.svg';
 import "./index.scss";
 import "./App.scss";
 
+type Note = {
+  id: number;
+  title: string;
+  content: string;
+}
+
 const App = () => {
-  const [notes, setNotes] = useState([
+  const [notes, setNotes] = useState<
+  Note[]
+  >([
     {
       id: 1,
       title: "note title 1",
@@ -47,8 +55,8 @@ const App = () => {
             <div className="notes-header">
               <button>x</button>
             </div>
-            <h2>Note Title</h2>
-            <p>Note Content</p>
+            <h2>{note.title}</h2>
+            <p>{note.content}</p>
           </div>
         ))}
 
