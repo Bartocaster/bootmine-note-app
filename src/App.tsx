@@ -1,6 +1,7 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import "./index.scss";
 import "./App.scss";
+
 
 type Note = {
   id: number;
@@ -8,37 +9,58 @@ type Note = {
   content: string;
 }
 
+// set up 4 pre notes to fill the screen.
 const App = () => {
-  const [notes, setNotes] = useState<
-  Note[]
-  >([
-    {
-      id: 1,
-      title: "note title 1",
-      content: "content 1",
-    },
-    {
-      id: 2,
-      title: "note title 2",
-      content: "content 2",
-    },
-    {
-      id: 3,
-      title: "note title 3",
-      content: "content 3",
-    },
-    {
-      id: 4,
-      title: "note title 4",
-      content: "content 4",
-    },
-  ]);
+  const [notes, setNotes] = useState<Note[]>([])
+  
+  // ([
+  //   {
+  //     id: 1,
+  //     title: "note title 1",
+  //     content: "content 1",
+  //   },
+  //   {
+  //     id: 2,
+  //     title: "note title 2",
+  //     content: "content 2",
+  //   },
+  //   {
+  //     id: 3,
+  //     title: "note title 3",
+  //     content: "content 3",
+  //   },
+  //   {
+  //     id: 4,
+  //     title: "note title 4",
+  //     content: "content 4",
+  //   },
+  // ]);
 
   const [title, setTitle] = useState("");
   const [content, setContent] = useState("");
 
   const [selectedNote, setSelectedNote] =
-  useState<Note | null>(null);
+    useState<Note | null>(null);
+
+  useEffect(()=> {
+    const fetchNotes = async ()=>{
+      try {
+        const respone = 
+        await fetch("http://localhost:5000/api/notes")
+        
+        const notes: Note[] = await respone.json();
+
+        setNotes(notes) // the object function.
+      } catch (error) {
+        console.log(error);
+      }
+    };
+
+    // call the useEffect;
+    fetchNotes();
+    // empty bracket [] so the get dispalyed with the first render. 
+  }, []);
+
 
   const handleNoteClick = (note:Note) => {
     setSelectedNote(note);
