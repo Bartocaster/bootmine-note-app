@@ -105,31 +105,51 @@ const App = () => {
 
   };
     
-  const handleUpdateNote = (
+  const handleUpdateNote = async(
     event: React.FormEvent
   ) => {
     event.preventDefault();
+    
 
     if(!selectedNote){
       return;
     }
+    
+    try {
+      const response = await fetch(
+        `http://localhost:5000/api/notes/${selectedNote.id}`,
+        {
+          method: 'PUT',
+          headers: {
+            "Content-Type": "application/json"
+          },
+          body: JSON.stringify({
+            title,
+            content,
+          })
+        }
+      )
+      
+      const updatedNote = await response.json();
 
-    const updatedNote: Note = {
-      id: selectedNote.id,
-      title: title,
-      content: content,
+      const updatedNotesList = notes.map((note)=>
+      note.id === selectedNote.id
+        ? updatedNote
+        : note
+      )
+  
+      setNotes(updatedNotesList);
+      setTitle("")
+      setContent("")
+      setSelectedNote(null);
+    } catch (error) {
+      console.log(error);
     }
-
-    const updatedNotesList = notes.map((note)=>
-    note.id === selectedNote.id
-      ? updatedNote
-      : note
-    )
-
-    setNotes(updatedNotesList);
-    setTitle("")
-    setContent("")
-    setSelectedNote(null);
+    // const updatedNote: Note = {
+    //   id: selectedNote.id,
+    //   title: title,
+    //   content: content,
+    // }
   };
 
   const handleCancel = () => {
