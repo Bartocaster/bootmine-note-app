@@ -158,17 +158,29 @@ const App = () => {
     setSelectedNote(null);
   }
   
-  const deleteNote = (
+  const deleteNote = async (
     event: React.MouseEvent,
     noteId: number
     ) => {
       event.stopPropagation();
+      
+      try {
+        await fetch(
+          `http://localhost:5000/api/notes/${noteId}`,
+          {
+            method: "DELETE",
+          }
+        )
+        const updatedNotes = notes.filter(
+          (note) => note.id !== noteId
+        )
+    
+        setNotes(updatedNotes);
+      } catch (error) {
+        
+      }
 
-    const updatedNotes = notes.filter(
-      (note) => note.id !== noteId
-    )
 
-    setNotes(updatedNotes);
   };
 
   
