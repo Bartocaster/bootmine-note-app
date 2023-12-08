@@ -2,7 +2,6 @@ import React, { useEffect, useState } from 'react';
 import "./index.scss";
 import "./App.scss";
 
-
 type Note = {
   id: number;
   title: string;
@@ -13,6 +12,7 @@ type Note = {
 const App = () => {
   const [notes, setNotes] = useState<Note[]>([])
   
+  // the dummy array note are no longer required.
   // ([
   //   {
   //     id: 1,
@@ -66,24 +66,43 @@ const App = () => {
     setSelectedNote(note);
     setTitle(note.title);
     setContent(note.content);
-
   }
-
-  const handleAddNote = (
+  // adding async to the function
+  const handleAddNote = async (
     event: React.FormEvent
   ) => {
     event.preventDefault();
 
+    try {
+      const response = await fetch(
+        "http://localhost:5000/api/notes",
+        {
+          method:"POST",
+          headers: {
+            "content-Type": "application/json"
+          },
+          body: JSON.stringify({
+            title,
+            content,
+          })
+        }
+      )
+      const newNote= await response.json();
 
-    const newNote: Note = {
-      id: notes.length + 1,
-      title: title,
-      content: content,
-    };
+        setNotes([newNote, ...notes]);
+        setTitle("");
+        setContent("");
+    } catch (error) {
+      console.log(error);
+    }
+    // no longer needed for the front-end
+    // const newNote: Note = {
+    //   id: notes.length + 1,
+    //   title: title,
+    //   content: content,
+    // };
 
-    setNotes([newNote, ...notes]);
-    setTitle("");
-    setContent("");
+
   };
     
   const handleUpdateNote = (
