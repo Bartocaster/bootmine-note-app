@@ -2,6 +2,8 @@ import React, { useEffect, useState } from 'react';
 import "./index.scss";
 import "./App.scss";
 
+
+
 type Note = {
   id: number;
   title: string;
@@ -157,7 +159,7 @@ const App = () => {
     setContent("")
     setSelectedNote(null);
   }
-  
+  // should have conformation it is deleted.
   const deleteNote = async (
     event: React.MouseEvent,
     noteId: number
@@ -228,6 +230,10 @@ const App = () => {
             onClick={()=> handleNoteClick(note)}
           >
             <div className="notes-header">
+              <img className="red-pin"  
+                src="Red-bord-pin.png" 
+                alt="Bord Pin"
+              ></img>
               <button onClick={(event) =>
                 deleteNote(event, note.id)
               }
