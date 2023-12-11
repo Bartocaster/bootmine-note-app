@@ -1,21 +1,22 @@
 # setup Bootmine-note-app
 
-When setting up first clone both:
+When setting up first clone both the:
 Back-end: https://github.com/Bartocaster/bootmine-note-app
 Front-end: https://github.com/Bartocaster/Bootmine-note-server
 
-when both are cloned do npm install for both of them.
+When both are cloned do npm install for both of them.
 
-create a .env file in bootmine-note-server 
+Create a .env file in bootmine-note-server 
 decide which local databse or the databse server i provided.
 
-for local Database:
+For local Database:
 Instruction for localdatabase are in ./database-server/sqlcommand.
 
-for server provide Database: 
-(read the instructions of the schema.prisma file how to change.)
-start server up with npm start
-same goes for the note-app.
+For server provide Database: 
+(read the instructions of the schema.prisma file how to change.).
+
+Star the server up with npm start
+The same goes for the note-app.
 
 enjoy.
 
