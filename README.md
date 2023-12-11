@@ -1,6 +1,24 @@
-# Getting Started with Create React App
+# setup Bootmine-note-app
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+When setting up first clone both:
+Back-end: https://github.com/Bartocaster/bootmine-note-app
+Front-end: https://github.com/Bartocaster/Bootmine-note-server
+
+when both are cloned do npm install for both of them.
+
+create a .env file in bootmine-note-server 
+decide which local databse or the databse server i provided.
+
+for local Database:
+Instruction for localdatabase are in ./database-server/sqlcommand.
+
+for server provide Database: 
+(read the instructions of the schema.prisma file how to change.)
+start server up with npm start
+same goes for the note-app.
+
+enjoy.
+
 
 ## Available Scripts
 

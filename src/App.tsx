@@ -2,8 +2,6 @@ import React, { useEffect, useState } from 'react';
 import "./index.scss";
 import "./App.scss";
 
-
-
 type Note = {
   id: number;
   title: string;
@@ -14,29 +12,6 @@ type Note = {
 const App = () => {
   const [notes, setNotes] = useState<Note[]>([])
   
-  // the dummy array note are no longer required.
-  // ([
-  //   {
-  //     id: 1,
-  //     title: "note title 1",
-  //     content: "content 1",
-  //   },
-  //   {
-  //     id: 2,
-  //     title: "note title 2",
-  //     content: "content 2",
-  //   },
-  //   {
-  //     id: 3,
-  //     title: "note title 3",
-  //     content: "content 3",
-  //   },
-  //   {
-  //     id: 4,
-  //     title: "note title 4",
-  //     content: "content 4",
-  //   },
-  // ]);
 
   const [title, setTitle] = useState("");
   const [content, setContent] = useState("");
@@ -63,7 +38,7 @@ const App = () => {
     // empty bracket [] so the get dispalyed with the first render. 
   }, []);
 
-
+  // when a note get clicked we want the input to be filled with what was written on the note.
   const handleNoteClick = (note:Note) => {
     setSelectedNote(note);
     setTitle(note.title);
@@ -97,14 +72,6 @@ const App = () => {
     } catch (error) {
       console.log(error);
     }
-    // no longer needed for the front-end
-    // const newNote: Note = {
-    //   id: notes.length + 1,
-    //   title: title,
-    //   content: content,
-    // };
-
-
   };
     
   const handleUpdateNote = async(
@@ -112,7 +79,6 @@ const App = () => {
   ) => {
     event.preventDefault();
     
-
     if(!selectedNote){
       return;
     }
@@ -147,11 +113,6 @@ const App = () => {
     } catch (error) {
       console.log(error);
     }
-    // const updatedNote: Note = {
-    //   id: selectedNote.id,
-    //   title: title,
-    //   content: content,
-    // }
   };
 
   const handleCancel = () => {
@@ -159,6 +120,7 @@ const App = () => {
     setContent("")
     setSelectedNote(null);
   }
+
   // should have conformation it is deleted.
   const deleteNote = async (
     event: React.MouseEvent,
