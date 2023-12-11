@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import "./index.scss";
 import "./App.scss";
 
+
 type Note = {
   id: number;
   title: string;
@@ -12,7 +13,6 @@ type Note = {
 const App = () => {
   const [notes, setNotes] = useState<Note[]>([])
   
-
   const [title, setTitle] = useState("");
   const [content, setContent] = useState("");
 
@@ -121,31 +121,36 @@ const App = () => {
     setSelectedNote(null);
   }
 
-  // should have conformation it is deleted.
   const deleteNote = async (
     event: React.MouseEvent,
     noteId: number
-    ) => {
-      event.stopPropagation();
-      
+  ) => {
+    event.stopPropagation();
+    
+    const confirmDelete = window.confirm("Are you sure you want to delete this note?");
+  
+    if (confirmDelete) {
       try {
         await fetch(
           `http://localhost:5000/api/notes/${noteId}`,
           {
             method: "DELETE",
           }
-        )
+        );
+  
         const updatedNotes = notes.filter(
           (note) => note.id !== noteId
-        )
-    
+        );
+  
         setNotes(updatedNotes);
+  
+        // Show a confirmation message after successful deletion
       } catch (error) {
-        
+        console.log(error);
       }
-
-
+    }
   };
+  
 
   
   return(
@@ -196,6 +201,7 @@ const App = () => {
                 src="Red-bord-pin.png" 
                 alt="Bord Pin"
               ></img>
+             
               <button onClick={(event) =>
                 deleteNote(event, note.id)
               }
