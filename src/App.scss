@@ -14,40 +14,51 @@
    }
 }
 body {
-  margin: 20px;
-  background-color: lightgrey;
+  // margin: 20px;
+  background-color: rgb(245, 237, 237);
 }
 
+.header-container {
+  background-color: black;
+  color: lightgrey;
+  text-align: center;
+}
+
+.header {
+  padding: 20px;
+  margin: 0;
+  font-size: 36px;
+}
 .app-container {
   grid-template-columns: 1fr;
 }
 
 @media (min-width: 600px) {
   .app-container {
-    display: grid;
-    grid-template-columns: 200px 1fr;
-    gap: 20px;
+    // display: grid;
+    // grid-template-columns: 200px 1fr;
+    // gap: 20px;
   }
 }
 
-.notes-grid {
-  display: grid;
-  grid-template-columns: repeat(
-    auto-fill, 
-    minmax(250px, 1fr)
-  );
-  grid-auto-rows: minmax(250px, auto);
-  gap: 20px;
-}
+// .notes-grid {
+//   display: grid;
+//   grid-template-columns: repeat(
+//     auto-fill, 
+//     minmax(250px, 1fr)
+//   );
+//   grid-auto-rows: minmax(250px, auto);
+//   gap: 20px;
+// }
 
-
+$note-paper-color: lightyellow;
 .note-item {
   display: flex;
   flex-direction: column;
   border: 1px solid #ccc;
   padding: 10px;
   border-radius: 5px;
-  background-color: #f9f9f9;
+  background-color: $note-paper-color;
   box-shadow: 0px 0px 10px 
   rgba(0, 0, 0, 0.1);
   cursor: pointer;
@@ -66,30 +77,71 @@ body {
   }
 }
 
-.red-pin {
-  padding-right: 80px;
-  width: 50px;
-  height: 50px;
-  
-}
-
 h2 {
   margin: 0;
 }
+// save the old code
+// $note-button-color: lightgreen;
+// .note-form {
+//   display: flex;
+//   flex-direction: column;
+//   gap: 20px;
 
-$note-button-color: rgb(106,175,198);
+//   position: absolute; 
+//   bottom: 0; 
+//   left: 0; 
+//   z-index: 10;
+
+//   button {
+//     border-radius: 5px;
+//     background-color: $note-button-color;
+//     cursor: pointer;
+//   }
+
+// }
+
+$note-grid-bg: lightgrey;
+$note-form-bg: darkgrey;
+$note-button-color: lightgreen;
+$cancel-button-color: rgb(220, 89, 89);
+$edit-button-text-color: white;
+
+/* Styles for note-grid */
+.note-grid-container {
+  background-color: $note-grid-bg;
+  padding: 20px; /* Add padding for spacing */
+}
+
+.notes-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+  grid-auto-rows: minmax(250px, auto);
+  gap: 20px;
+}
+
+/* Styles for note-form */
+.note-form-container {
+  background-color: $note-form-bg;
+  padding: 20px; /* Add padding for spacing */
+  display: flex;
+  justify-content: flex-start;
+}
+
 .note-form {
   display: flex;
   flex-direction: column;
   gap: 20px;
+  max-width: 400px;
+  width: 100%; /* Occupy full width */
+  padding: 20px;
 
   button {
     border-radius: 5px;
     background-color: $note-button-color;
     cursor: pointer;
   }
-
 }
+
 
 textarea,
 input {
