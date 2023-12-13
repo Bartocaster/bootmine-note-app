@@ -182,7 +182,10 @@ const App = () => {
         </div>
       </div>
       <footer className='note-form-container '>
+      <div className='new-note'>
         New note
+      </div>
+      
         <form className="note-form"
           onSubmit={(event) =>
             selectedNote
@@ -195,7 +198,7 @@ const App = () => {
             onChange={(event) =>
               setTitle(event.target.value)
             }
-            placeholder="title"
+            placeholder="Your note title"
             required
           ></input>
           <textarea
@@ -203,23 +206,32 @@ const App = () => {
             onChange={(event) =>
               setContent(event.target.value)
             }
-            placeholder="Content"
+            placeholder="Type your text here. Feel free to markdown"
             rows={10}
             required
           ></textarea>
 
           {selectedNote ? (
             <div className="edit-buttons">
-              <button type="submit">Save</button>
+              <button type="submit">Toevoegen</button>
               <button onClick={handleCancel}>
-                Cancel
+                Annuleren
               </button>
             </div>
           ) : (
-            <button type="submit">Add Note</button>
+            <button type="submit">Toevoegen</button>
           )}
         </form>
-      </footer>
+        </footer>
+        <div className='bottem'>
+          <div>
+            © Bootmine,  2023 
+          </div>
+          <div>
+            1 Note
+          </div>
+        </div>
+      
     </div>
   );
 };

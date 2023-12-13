@@ -1,10 +1,13 @@
 @import "./Styles/variables";
 @import "./Styles/mixins";
+:root {
+  --main-font: 'Source Sans Pro', sans-serif;
+}
+
 .wrapper {
   background-color: $background-color;
   color: $text-color;
   padding: $block-padding;
-
   &__btns {
     @include vertical-list;
     button {
@@ -15,6 +18,7 @@
 }
 body {
   // margin: 20px;
+  font-family: var(--main-font);
   background-color: rgb(245, 237, 237);
 }
 
@@ -59,9 +63,24 @@ $note-paper-color: lightyellow;
   padding: 10px;
   border-radius: 5px;
   background-color: $note-paper-color;
-  box-shadow: 0px 0px 10px 
-  rgba(0, 0, 0, 0.1);
   cursor: pointer;
+  
+
+  h2 {
+    font-size: 22px;
+    font-weight: 600;
+    line-height: 28px;
+    letter-spacing: 0px;
+    text-align: left;
+    border-bottom: 1px solid black; 
+  }
+  p {
+    font-size: 18px;
+    font-weight: 400;
+    line-height: 28px;
+    letter-spacing: 0px;
+    text-align: left;
+  }
 }
 
 .notes-header {
@@ -104,7 +123,7 @@ $note-grid-bg: lightgrey;
 $note-form-bg: darkgrey;
 $note-button-color: lightgreen;
 $cancel-button-color: rgb(220, 89, 89);
-$edit-button-text-color: white;
+$white: white;
 
 /* Styles for note-grid */
 .note-grid-container {
@@ -125,38 +144,82 @@ $edit-button-text-color: white;
   padding: 20px; /* Add padding for spacing */
   display: flex;
   justify-content: flex-start;
+  flex-direction: column;
 }
 
+
+.new-note {
+  padding: 20px;
+  font-size: 26px; 
+  font-weight: 600;
+  margin-bottom: 10px; 
+}
+
+
 .note-form {
+  top: 97px;
+  left: 135px;
+  border-radius: 5px;
+  background-color: $white;
   display: flex;
   flex-direction: column;
   gap: 20px;
   max-width: 400px;
-  width: 100%; /* Occupy full width */
+  width: 570px;
+  height: 287px; 
   padding: 20px;
 
   button {
+    width: 146px;
+    height: 41px;
+    top: 216px;
+    left: 394px;
+    opacity: 0.5px;
     border-radius: 5px;
     background-color: $note-button-color;
     cursor: pointer;
   }
+  button[type="submit"] {
+    border-radius: 5px;
+    background-color: $note-button-color;
+    cursor: pointer;
+    align-self: flex-end; /* Align to the right */
+  }
+
 }
 
-
-textarea,
 input {
+  font-size: 22px;
+  font-weight: 600;
+  line-height: 28px;
+  letter-spacing: 0px;
+  text-align: left;
+  border: none; 
+  padding: 10px;
+  font-size: 26px;
+  outline: none; 
+  border-bottom: 1px solid black; 
+}
+
+textarea {
+  font-size: 18px;
+  font-weight: 400;
+  line-height: 23px;
+  letter-spacing: 0px;
+  text-align: left;
+  border: none; 
   border-radius: 5px;
-  border: 1px solid black;
   padding: 10px;
   font-size: 16px;
+  outline: none; /* Remove default outline */
 }
 
 
 $cancel-button-color: rgb(220, 89, 89);
-$edit-button-text-color: white;
+$white: white;
 .edit-buttons {
   display: flex;
-  justify-content: space-evenly;
+  justify-content: space-evenlfly;
   gap: 5px;
 
   button {
@@ -165,7 +228,27 @@ $edit-button-text-color: white;
 
   button:last-of-type {
     background-color: $cancel-button-color;
-    color: $edit-button-text-color;
+    color: $white;
   }
 
+}
+
+.bottem {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px; /* Adjust padding as needed */
+  background-color: white; /* Set the background color to white */
+
+  /* Styles for the left section */
+  div:nth-child(1) {
+    /* Adjust styles for Bootmine and year */
+    color: black; /* Set the text color */
+  }
+
+  /* Styles for the right section */
+  div:nth-child(2) {
+    /* Adjust styles for note count */
+    color: black; /* Set the text color */
+  }
 }
