@@ -37,13 +37,13 @@ body {
   grid-template-columns: 1fr;
 }
 
-@media (min-width: 600px) {
-  .app-container {
-    // display: grid;
-    // grid-template-columns: 200px 1fr;
-    // gap: 20px;
-  }
-}
+// @media (min-width: 600px) {
+//   // .app-container {
+//   //   // display: grid;
+//   //   // grid-template-columns: 200px 1fr;
+//   //   // gap: 20px;
+//   // }
+// }
 
 // .notes-grid {
 //   display: grid;
@@ -56,7 +56,9 @@ body {
 // }
 
 $note-paper-color: lightyellow;
+$line-color: lightgrey;
 .note-item {
+  position: relative;
   display: flex;
   flex-direction: column;
   border: 1px solid #ccc;
@@ -65,14 +67,14 @@ $note-paper-color: lightyellow;
   background-color: $note-paper-color;
   cursor: pointer;
   
-
+  
   h2 {
     font-size: 22px;
     font-weight: 600;
     line-height: 28px;
     letter-spacing: 0px;
     text-align: left;
-    border-bottom: 1px solid black; 
+    border-bottom: 1px solid $line-color; 
   }
   p {
     font-size: 18px;
@@ -81,18 +83,24 @@ $note-paper-color: lightyellow;
     letter-spacing: 0px;
     text-align: left;
   }
+  img {
+    height: 26px;
+    width: 26px;
+    padding: 7px 7px;
+  }
 }
-
 .notes-header {
-  display: flex;
-  justify-content:  flex-end;
+  position: absolute;
+  bottom: 5px; 
+  right: 5px; 
 
   button {
-    font-size: 16px;
+    padding: 0; /* Remove default button padding */
     background: transparent;
     border: none;
     cursor: pointer;
     max-width: fit-content;
+
   }
 }
 
@@ -198,7 +206,7 @@ input {
   padding: 10px;
   font-size: 26px;
   outline: none; 
-  border-bottom: 1px solid black; 
+  border-bottom: 1px solid $line-color;
 }
 
 textarea {

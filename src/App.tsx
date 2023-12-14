@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import "./index.scss";
 import "./App.scss";
+import trashcan from "./icons/basic_trashcan.png";
+import pencil from "./icons/software_pencil.png";
 
 
 type Note = {
@@ -166,16 +168,17 @@ const App = () => {
             <div className="note-item"
               onClick={() => handleNoteClick(note)}
             >
+              <h2>{note.title}</h2>
+              <p>{note.content}</p>
               <div className="notes-header">
                 <button onClick={(event) =>
                   deleteNote(event, note.id)
                 }
                 >
-                  x
+                  <img src={trashcan} alt="trashcan"></img>
                 </button>
+                <img src={pencil} alt="pencil"></img>
               </div>
-              <h2>{note.title}</h2>
-              <p>{note.content}</p>
             </div>
           ))}
 
