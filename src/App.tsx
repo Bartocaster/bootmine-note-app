@@ -17,10 +17,9 @@ const App = () => {
 
   const [title, setTitle] = useState("");
   const [content, setContent] = useState("");
-  // stop
-  //stop
-const [showDeleteConfirmation, setShowDeleteConfirmation] = useState(false);
-const [noteToDeleteId, setNoteToDeleteId] = useState<number | null>(null);
+
+  const [showDeleteConfirmation, setShowDeleteConfirmation] = useState(false);
+  const [noteToDeleteId, setNoteToDeleteId] = useState<number | null>(null);
 
 
   const [selectedNote, setSelectedNote] =
@@ -51,7 +50,7 @@ const [noteToDeleteId, setNoteToDeleteId] = useState<number | null>(null);
     setTitle(note.title);
     setContent(note.content);
   }
-  // adding async to the function
+  
   const handleAddNote = async (
     event: React.FormEvent
   ) => {
@@ -128,35 +127,6 @@ const [noteToDeleteId, setNoteToDeleteId] = useState<number | null>(null);
     setSelectedNote(null);
   }
 
-  // const deleteNote = async (
-  //   event: React.MouseEvent,
-  //   noteId: number
-  // ) => {
-  //   event.stopPropagation();
-
-  //   const confirmDelete = window.confirm("Are you sure you want to delete this note?");
-
-  //   if (confirmDelete) {
-  //     try {
-  //       await fetch(
-  //         `http://localhost:5000/api/notes/${noteId}`,
-  //         {
-  //           method: "DELETE",
-  //         }
-  //       );
-
-  //       const updatedNotes = notes.filter(
-  //         (note) => note.id !== noteId
-  //       );
-
-  //       setNotes(updatedNotes);
-
-  //       // Show a confirmation message after successful deletion
-  //     } catch (error) {
-  //       console.log(error);
-  //     }
-  //   }
-  // };
   const deleteNote = (
     event: React.MouseEvent,
     noteId: number
