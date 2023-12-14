@@ -13,11 +13,15 @@ type Note = {
 
 // set up 4 pre notes to fill the screen.
 const App = () => {
-  
   const [notes, setNotes] = useState<Note[]>([])
 
   const [title, setTitle] = useState("");
   const [content, setContent] = useState("");
+  // stop
+  //stop
+const [showDeleteConfirmation, setShowDeleteConfirmation] = useState(false);
+const [noteToDeleteId, setNoteToDeleteId] = useState<number | null>(null);
+
 
   const [selectedNote, setSelectedNote] =
     useState<Note | null>(null);
@@ -124,37 +128,68 @@ const App = () => {
     setSelectedNote(null);
   }
 
-  const deleteNote = async (
+  // const deleteNote = async (
+  //   event: React.MouseEvent,
+  //   noteId: number
+  // ) => {
+  //   event.stopPropagation();
+
+  //   const confirmDelete = window.confirm("Are you sure you want to delete this note?");
+
+  //   if (confirmDelete) {
+  //     try {
+  //       await fetch(
+  //         `http://localhost:5000/api/notes/${noteId}`,
+  //         {
+  //           method: "DELETE",
+  //         }
+  //       );
+
+  //       const updatedNotes = notes.filter(
+  //         (note) => note.id !== noteId
+  //       );
+
+  //       setNotes(updatedNotes);
+
+  //       // Show a confirmation message after successful deletion
+  //     } catch (error) {
+  //       console.log(error);
+  //     }
+  //   }
+  // };
+  const deleteNote = (
     event: React.MouseEvent,
     noteId: number
   ) => {
     event.stopPropagation();
+    setNoteToDeleteId(noteId);
+    setShowDeleteConfirmation(true);
+  };
 
-    const confirmDelete = window.confirm("Are you sure you want to delete this note?");
+  const handleConfirmDelete = async () => {
+    try {
+      await fetch(`http://localhost:5000/api/notes/${noteToDeleteId}`, {
+        method: "DELETE",
+      });
 
-    if (confirmDelete) {
-      try {
-        await fetch(
-          `http://localhost:5000/api/notes/${noteId}`,
-          {
-            method: "DELETE",
-          }
-        );
+      const updatedNotes = notes.filter(
+        (note) => note.id !== noteToDeleteId
+      );
 
-        const updatedNotes = notes.filter(
-          (note) => note.id !== noteId
-        );
-
-        setNotes(updatedNotes);
-
-        // Show a confirmation message after successful deletion
-      } catch (error) {
-        console.log(error);
-      }
+      setNotes(updatedNotes);
+      setShowDeleteConfirmation(false);
+      setNoteToDeleteId(null);
+    } catch (error) {
+      console.log(error);
     }
   };
 
+  const handleCancelDelete = () => {
+    setShowDeleteConfirmation(false);
+    setNoteToDeleteId(null);
+  };
 
+  
 
   return (
     <div>
@@ -233,7 +268,14 @@ const App = () => {
             1 Note
           </div>
         </div>
+        {showDeleteConfirmation && (
+        <div className={`delete-confirmation ${showDeleteConfirmation ? 'show' : ''}`}>
+          <p>Are you sure you want to delete this note?</p>
+          <button onClick={handleConfirmDelete}>Delete</button>
+          <button onClick={handleCancelDelete}>Cancel</button>
       
+        </div>
+      )}
     </div>
   );
 };
