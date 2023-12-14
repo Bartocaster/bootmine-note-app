@@ -269,12 +269,14 @@ const [noteToDeleteId, setNoteToDeleteId] = useState<number | null>(null);
           </div>
         </div>
         {showDeleteConfirmation && (
+      <div className='overlay'>
         <div className={`delete-confirmation ${showDeleteConfirmation ? 'show' : ''}`}>
-          <p>Are you sure you want to delete this note?</p>
-          <button onClick={handleConfirmDelete}>Delete</button>
-          <button onClick={handleCancelDelete}>Cancel</button>
-      
+          <p>Weet je zeker dat je deze notitie wilt verwijderen?</p>
+          <p>Dit kan niet ongedaan worden gemaakt</p>
+          <button onClick={handleCancelDelete}>ANNULEREN</button>
+          <button onClick={handleConfirmDelete}>VERWIJDEREN</button>
         </div>
+      </div>
       )}
     </div>
   );

@@ -99,6 +99,7 @@ $cancel-button-color: rgb(220, 89, 89);
 $white: white;
 
 /* Styles for note-grid */
+// this is the section where all the yellow notes are being showed.
 .note-grid-container {
   background-color: $note-grid-bg;
   padding: 20px; /* Add padding for spacing */
@@ -144,7 +145,7 @@ $white: white;
   margin-bottom: 10px; 
 }
 
-
+// note form = the bottem scss where you add new notes.
 .note-form {
   border-radius: 5px;
   background-color: $white;
@@ -242,7 +243,10 @@ $white: white;
     color: black; /* Set the text color */
   }
 }
+// this is the popup.
 .delete-confirmation {
+  box-shadow: 0px 2px 2px 0px #0000004D;
+  border-radius: 5px solid $white;
   display: none;
   position: fixed;
   top: 50%;
@@ -250,10 +254,54 @@ $white: white;
   transform: translate(-50%, -50%);
   background: white;
   padding: 20px;
-  border: 1px solid #ccc;
+  text-align: center;
+  
   &.show {
     display: block; /* Show the delete confirmation when 'show' class is added */
   }
+  p {
+    font-size: 26px;
+    font-weight: 600;
+    line-height: 33px;
+    letter-spacing: 0px;
+    text-align: center;
+    
+  }
+  p:last-of-type{
+    color: #AAAAAA;
+    font-size: 18px;
+    font-weight: 400;
+    line-height: 23px;
+    letter-spacing: 0px;
+    text-align: center;
+  }
+  button {
+    margin: 0 10px;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-weight: bold;
+  }
+
+  button:first-child {
+    background-color: #717171;
+    color: $white;
+  }
+
+  button:last-child {
+    background-color: $cancel-button-color;
+    color: $white;
+  }
+}
+// the darkness behind the popup boooo sarcyyy!!
+.overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5); /* Adjust the alpha value for transparency */
+  z-index: 100; /* Ensure it's on top of other content */
 }
 
 
