@@ -217,9 +217,7 @@ const App = () => {
           {selectedNote ? (
             <div className="edit-buttons">
               <button type="submit">Toevoegen</button>
-              <button onClick={handleCancel}>
-                Annuleren
-              </button>
+              <button onClick={handleCancel}>Annuleren</button>
             </div>
           ) : (
             <button type="submit">Toevoegen</button>
