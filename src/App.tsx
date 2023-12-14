@@ -13,6 +13,7 @@ type Note = {
 
 // set up 4 pre notes to fill the screen.
 const App = () => {
+  
   const [notes, setNotes] = useState<Note[]>([])
 
   const [title, setTitle] = useState("");
