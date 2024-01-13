@@ -15,6 +15,7 @@ const NoteItem: React.FC<NoteItemProps> = ({ note, onClick, onDelete }) => {
         <div className='note-header'>
           <h2>{note.title}</h2>
         </div>
+        <div><hr></hr></div>
         <div className='note-body'onClick={onClick}>
           <p>{note.content}</p>
         </div>
