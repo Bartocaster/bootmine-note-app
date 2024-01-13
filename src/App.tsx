@@ -18,6 +18,7 @@ const App: React.FC = () => {
   const [showDeleteConfirmation, setShowDeleteConfirmation] = useState(false);
   const [noteToDeleteId, setNoteToDeleteId] = useState<number | null>(null);
   const [selectedNote, setSelectedNote] = useState<Note | null>(null);
+  
 
   useEffect(() => {
     const fetchNotes = async () => {
@@ -62,6 +63,60 @@ const App: React.FC = () => {
       console.log(error);
     }
   };
+
+
+
+
+
+
+  const onTextChange = async (
+    event: React.FormEvent
+  ) => {
+
+    event.preventDefault();
+   
+    if (!selectedNote) {
+      return;
+    }
+    setTitle("My name is Bart");
+    setContent("warren is great");
+    try {
+      const response = await fetch(
+        `http://localhost:5000/api/notes/${selectedNote.id}`,
+        {
+          method: 'PUT',
+          headers: {
+            "Content-Type": "application/json"
+          },
+          body: JSON.stringify({
+            title,
+            content,
+          })
+        }
+      )
+
+      const updatedNote = await response.json();
+
+      const updatedNotesList = notes.map((note) =>
+        note.id === selectedNote.id
+          ? updatedNote
+          : note
+      )
+
+      setNotes(updatedNotesList);
+      setTitle("")
+      setContent("")
+      setSelectedNote(null);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+
+
+
+
+
 
   const handleUpdateNote = async (
     event: React.FormEvent
@@ -143,7 +198,6 @@ const App: React.FC = () => {
   };
 
   
-
   return (
     <div>
       <div className="header-container">
@@ -155,6 +209,11 @@ const App: React.FC = () => {
         notes={notes}
         onNoteClick={handleNoteClick}
         onDeleteNote={deleteNote}
+        onChangeTitle={setTitle}
+        onChangeContent={setContent}
+        onTextChange={(event) => onTextChange(event)}
+        onSubmit={(event) => (handleUpdateNote(event))}
+        selectedNoteId={selectedNote === null ? -1 : selectedNote.id}
       />
       <footer className="note-form-container">
         <div className="new-note">New note</div>
@@ -163,7 +222,7 @@ const App: React.FC = () => {
           content={content}
           onChangeTitle={setTitle}
           onChangeContent={setContent}
-          onSubmit={(event) => (selectedNote ? handleUpdateNote(event) : handleAddNote(event))}
+          onSubmit={(event) => (handleAddNote(event))}
           onCancel={handleCancel}
         />
       </footer>

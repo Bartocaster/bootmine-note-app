@@ -1,36 +1,50 @@
 
-import { Note } from './types'; 
+import { Note } from './types';
 import trashcan from "./icons/basic_trashcan.png";
 import pencil from "./icons/software_pencil.png";
+import React from 'react';
 
 interface NoteItemProps {
   note: Note;
-  onClick: () => void;
+  EditNoteClick: () => void;
+  onChangeContent: (content: string) => void;
+  onChangeTitle: (title: string) => void;
+  onSubmit: (event: React.FormEvent) => void;
+  onTextChange: (content: React.FormEvent) => void;
   onDelete: (event: React.MouseEvent) => void;
+  enabled: boolean;
 }
 
-const NoteItem: React.FC<NoteItemProps> = ({ note, onClick, onDelete }) => {
-    return (
-      <div className="note-item">
-        <div className='note-header'>
-          <h2>{note.title}</h2>
-        </div>
-        <div className='note-divider-wrapper'>
-          <hr className='note-divider'></hr>
-        </div>
-        <div className='note-body'onClick={onClick}>
-          <p>{note.content}</p>
+const NoteItem: React.FC<NoteItemProps> = ({ note, EditNoteClick, onChangeContent, onChangeTitle,onSubmit, onTextChange, onDelete, enabled }) => {
+  return (
+    <div className="note-item">
+      <div className='note-header'>
+        <h2>{note.title}</h2>
+      </div>
+      <div className='note-divider-wrapper'>
+        <hr className='note-divider'></hr>
+      </div>
+      <form className="note-edit-form" onSubmit={onSubmit}> 
+        <div className='note-body' onClick={EditNoteClick}>
+          <textarea className='note-textarea'
+            name="content"
+            defaultValue={note.content}
+            onChange={(event) => onChangeContent(event.target.value)}
+            readOnly={!enabled}
+            disabled={!enabled}
+          ></textarea>
         </div>
         <div className="notes-footer">
           <button onClick={onDelete}>
             <img src={trashcan} alt="trashcan" />
           </button>
-          <button onClick={onClick}> 
+          <button type='submit'>
             <img src={pencil} alt="pencil" />
           </button>
         </div>
-      </div>
-    );
-  };
-  
-  export default NoteItem;
+      </form>
+    </div>
+  );
+};
+
+export default NoteItem;
