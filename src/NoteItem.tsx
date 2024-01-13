@@ -11,14 +11,20 @@ interface NoteItemProps {
 
 const NoteItem: React.FC<NoteItemProps> = ({ note, onClick, onDelete }) => {
     return (
-      <div className="note-item" onClick={onClick}>
-        <h2>{note.title}</h2>
-        <p>{note.content}</p>
-        <div className="notes-header">
+      <div className="note-item">
+        <div className='note-header'>
+          <h2>{note.title}</h2>
+        </div>
+        <div className='note-body'onClick={onClick}>
+          <p>{note.content}</p>
+        </div>
+        <div className="notes-footer">
           <button onClick={onDelete}>
             <img src={trashcan} alt="trashcan" />
           </button>
-          <img src={pencil} alt="pencil" />
+          <button onClick={onClick}> 
+            <img src={pencil} alt="pencil" />
+          </button>
         </div>
       </div>
     );
