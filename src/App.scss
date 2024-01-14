@@ -83,7 +83,7 @@ $line-color: lightgrey;
     background: transparent;
     border: none;
     cursor: pointer;
-    max-width: fit-content;
+    
 
   }
 }
@@ -202,9 +202,15 @@ textarea {
   border: none; 
   border-radius: 5px;
   padding: 10px;
+  resize: none;
   font-size: 16px;
   outline: none; /* Remove default outline */
   background-color: $note-paper-color;
+}
+.note-textarea {
+  // height: auto;
+  height: 100px; // made this temp until i can get it dynamicly
+  
 }
 
 
@@ -235,10 +241,8 @@ $white: white;
   width: 91px;
   height: 41px;
   margin-left: auto;
- 
-  button {
 
-   
+  button {
     flex: 1;
     background-color: black;
     color: $white;

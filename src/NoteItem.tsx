@@ -35,10 +35,12 @@ const NoteItem: React.FC<NoteItemProps> = ({ note, EditNoteClick, onChangeConten
             autoFocus={!enabled}
           ></textarea>
         {enabled && (
-        <div className="notes-edit-saveButton">
-          <button type='submit'>
-            Save
-          </button>
+        <div className="notes-footer">
+          <div className="notes-edit-saveButton">
+            <button type='submit'>
+              Save
+            </button>
+          </div>
         </div>
         )}
       </div>
