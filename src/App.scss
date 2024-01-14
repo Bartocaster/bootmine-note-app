@@ -174,6 +174,9 @@ $white: white;
     cursor: pointer;
     align-self: flex-end; /* Align to the right */
   }
+  textarea {
+    background-color: $white;
+  }
 
 }
 
@@ -201,6 +204,7 @@ textarea {
   padding: 10px;
   font-size: 16px;
   outline: none; /* Remove default outline */
+  background-color: $note-paper-color;
 }
 
 
@@ -217,11 +221,28 @@ $white: white;
     flex: 1;
   }
 
-  button:last-of-type {
-    background-color: $cancel-button-color;
+  // button:last-of-type {
+  //   background-color: $cancel-button-color;
+  //   color: $white;
+  // }
+
+}
+
+.notes-edit-saveButton {
+  display: flex;
+  justify-content: flex-end;
+  gap: 10px;
+  width: 91px;
+  height: 41px;
+  margin-left: auto;
+ 
+  button {
+
+   
+    flex: 1;
+    background-color: black;
     color: $white;
   }
-
 }
 
 .bottem {

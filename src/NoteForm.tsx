@@ -28,7 +28,7 @@ const NoteForm: React.FC<NoteFormProps> = ({ title, content, onChangeTitle, onCh
       />
       <div className="edit-buttons">
         <button type="submit">Toevoegen</button>
-        <button onClick={onCancel}>Annuleren</button>
+        {/* <button onClick={onCancel}>Annuleren</button> */}
       </div>
     </form>
   );

@@ -32,17 +32,27 @@ const NoteItem: React.FC<NoteItemProps> = ({ note, EditNoteClick, onChangeConten
             onChange={(event) => onChangeContent(event.target.value)}
             readOnly={!enabled}
             disabled={!enabled}
+            autoFocus={!enabled}
           ></textarea>
+        {enabled && (
+        <div className="notes-edit-saveButton">
+          <button type='submit'>
+            Save
+          </button>
         </div>
+        )}
+      </div>
+      {!enabled && (
         <div className="notes-footer">
           <button onClick={onDelete}>
             <img src={trashcan} alt="trashcan" />
           </button>
-          <button type='submit'>
+          <button onClick={EditNoteClick}>
             <img src={pencil} alt="pencil" />
           </button>
         </div>
-      </form>
+      )}
+    </form>
     </div>
   );
 };
