@@ -16,6 +16,7 @@ interface NoteItemProps {
 }
 
 const NoteItem: React.FC<NoteItemProps> = ({ note, EditNoteClick, onChangeContent, onChangeTitle,onSubmit, onTextChange, onDelete, enabled }) => {
+
   return (
     <div className="note-item">
       <div className='note-header'>
@@ -25,8 +26,9 @@ const NoteItem: React.FC<NoteItemProps> = ({ note, EditNoteClick, onChangeConten
         <hr className='note-divider'></hr>
       </div>
       <form className="note-edit-form" onSubmit={onSubmit}> 
-        <div className='note-body' onClick={EditNoteClick}>
-          <textarea className='note-textarea'
+      <div className={`note-body ${enabled ? "active" : ''}`}>
+          <textarea
+            className='note-textarea'
             name="content"
             defaultValue={note.content}
             onChange={(event) => onChangeContent(event.target.value)}
@@ -34,29 +36,31 @@ const NoteItem: React.FC<NoteItemProps> = ({ note, EditNoteClick, onChangeConten
             disabled={!enabled}
             autoFocus={!enabled}
           ></textarea>
-        {enabled && (
-        <div className="notes-footer">
-          <div className="notes-edit-saveButton">
-            <button type='submit'>
-              Save
+          {enabled && (
+            <div className="notes-footer">
+              <div className="notes-edit-saveButton">
+                <button type='submit'>
+                  Save
+                </button>
+              </div>
+            </div>
+          )}
+        </div>
+        {!enabled && (
+          <div className="notes-footer">
+            <button onClick={onDelete}>
+              <img src={trashcan} alt="trashcan" />
+            </button>
+            <button onClick={EditNoteClick}>
+              <img src={pencil} alt="pencil" />
             </button>
           </div>
-        </div>
         )}
-      </div>
-      {!enabled && (
-        <div className="notes-footer">
-          <button onClick={onDelete}>
-            <img src={trashcan} alt="trashcan" />
-          </button>
-          <button onClick={EditNoteClick}>
-            <img src={pencil} alt="pencil" />
-          </button>
-        </div>
-      )}
-    </form>
+      </form>
+      <div className="overlay"></div>
     </div>
   );
 };
+
 
 export default NoteItem;
